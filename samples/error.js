@@ -18,12 +18,12 @@
 
 'use strict';	
 
-const Datastore = require('@google-cloud/datastore');	
+const {Datastore} = require('@google-cloud/datastore');	
 
 // [START error]	
 function runQuery() {	
   // Creates a client	
-  const datastore = new Datastore({});	
+  const datastore = new Datastore();	
 
   const query = datastore.createQuery(['Company']).start('badrequest');	
 
@@ -36,21 +36,32 @@ function runQuery() {
       return entities;	
     })	
     .catch(err => {	
-      console.log(err.errors); // [...]	
-      console.log(err.code); // 3 (a gRPC error code)	
-      console.log(err.message); // "Bad Request"	
-      console.log(err.response); // {...}	
+        return { 'err' : 
+                        { 'err.code' : 'integer',
+                          'err.message' : 'string', 
+                          'err.status' : 'string' 
+                        }
+                }
 
-      // Process error	
+        /** The following is the structure of an error response for a JSON request:
+        *  {
+        *    "error": {
+        *      "code": "integer",
+        *      "message": "string",
+        *      "status": "string"
+        *      }
+        *   }
+        *  @see [For more information on error codes refer] https://cloud.google.com/datastore/docs/concepts/errors#error_codes
+        */        
+        
+        // Process error	
 
-      // For example, treat permission error like no entities were found	
-      // eslint-disable-next-line no-constant-condition	
-      if (/* some condition */ false) {	
-        return [];	
-      }	
+        // For example, treat permission error like no entities were found	
+        // eslint-disable-next-line no-constant-condition
 
-      // Forward the error to the caller	
-      return Promise.reject(err);	
+        if (/* some condition */ false) {	
+            return [];	
+        }	
     });	
 }	
 // [END error]	
