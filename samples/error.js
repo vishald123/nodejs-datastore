@@ -35,7 +35,16 @@ function runQuery() {
       entities.forEach(entity => console.log(entity));	
       return entities;	
     })	
-    .catch(err => {	
+    .catch(err => {
+       
+        // Process error	
+
+        // For example, treat permission error like no entities were found	
+        // eslint-disable-next-line no-constant-condition
+
+        if (/* some condition */ false) {	
+          return [];	
+        }		
         return { 'err' : 
                         { 'err.code' : 'integer',
                           'err.message' : 'string', 
@@ -53,15 +62,7 @@ function runQuery() {
         *   }
         *  @see [For more information on error codes refer] https://cloud.google.com/datastore/docs/concepts/errors#error_codes
         */        
-        
-        // Process error	
-
-        // For example, treat permission error like no entities were found	
-        // eslint-disable-next-line no-constant-condition
-
-        if (/* some condition */ false) {	
-            return [];	
-        }	
+       
     });	
 }	
 // [END error]	
