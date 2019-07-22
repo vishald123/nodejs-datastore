@@ -18,7 +18,7 @@
 const error = require('../error');
 
 describe('error', ()=>{
-    it('should throw an error', () => {
-        error.runQuery();
+    it('should throw an error',async () => {
+        await error.runQuery();
     });
 })
