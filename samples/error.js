@@ -46,9 +46,9 @@ function runQuery() {
           return [];	
         }
         return `{ ${err} : 
-                    { ${err.code} : 'integer',
-                      ${err.message} : 'string', 
-                      ${err.status} : 'string' 
+                    { 'err.code' : ${err.code},
+                      'err.message' : ${err.message}, 
+                      'err.status' : ${err.status} 
                     }
                 }`
         /** The following is the structure of an error response for a JSON request:
