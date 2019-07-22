@@ -44,14 +44,13 @@ function runQuery() {
 
         if (/* some condition */ false) {	
           return [];	
-        }		
-        return { 'err' : 
-                        { 'err.code' : 'integer',
-                          'err.message' : 'string', 
-                          'err.status' : 'string' 
-                        }
-                }
-
+        }
+        return `{ ${err} : 
+                    { ${err.code} : 'integer',
+                      ${err.message} : 'string', 
+                      ${err.status} : 'string' 
+                    }
+                }`
         /** The following is the structure of an error response for a JSON request:
         *  {
         *    "error": {
