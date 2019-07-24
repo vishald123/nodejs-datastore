@@ -16,9 +16,13 @@
 'use strict';	
 
 const error = require('../error');
+const chai = require('chai');
+var chaiAsPromised = require("chai-as-promised");
+chai.use(chaiAsPromised)
 
+const expect = chai.expect
 describe('error', ()=>{
     it('should throw an error',async () => {
-        await error.runQuery();
+        await expect(error.runQuery()).to.be.rejected;
     });
 })
