@@ -36,32 +36,23 @@ function runQuery() {
       return entities;	
     })	
     .catch(err => {
-       
-        // Process error	
+      console.log(err.code); //400
+      console.log(err.message); //"Key path is incomplete: [Person: null]"
+      console.log(err.status); //"INVALID_ARGUMENT"
+      /**
+      *  @see [For more information on error codes refer] https://cloud.google.com/datastore/docs/concepts/errors#error_codes
+      */ 
 
-        // For example, treat permission error like no entities were found	
-        // eslint-disable-next-line no-constant-condition
+      // Process error
 
-        if (/* some condition */ false) {	
-          return [];	
-        }
-        return `{ ${err} : 
-                    { 'err.code' : ${err.code},
-                      'err.message' : ${err.message}, 
-                      'err.status' : ${err.status} 
-                    }
-                }`
-        /** The following is the structure of an error response for a JSON request:
-        *  {
-        *    "error": {
-        *      "code": "integer",
-        *      "message": "string",
-        *      "status": "string"
-        *      }
-        *   }
-        *  @see [For more information on error codes refer] https://cloud.google.com/datastore/docs/concepts/errors#error_codes
-        */        
-       
+      // For example, treat permission error like no entities were found	
+      // eslint-disable-next-line no-constant-condition
+      if (/* some condition */ false) {	
+        return [];	
+      }  
+         
+      //Forward the error to caller
+      return Promise.reject(err);
     });	
 }	
 // [END error]	
