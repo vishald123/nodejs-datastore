@@ -13,16 +13,20 @@
  * limitations under the License.
  * 
  */
-'use strict';	
+'use strict';   
 
 const error = require('../error');
-const chai = require('chai');
-var chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised)
+const assert = require('assert');
 
-const expect = chai.expect
-describe('error', ()=>{
-    it('should throw an error',async () => {
-        await expect(error.runQuery()).to.be.rejected;
-    });
-})
+describe.only('error', () => {
+ it('should have an error', done => {
+   const errorCode = 3;
+   error.runQuery().then(
+     () => {},
+     err => {
+       assert.strictEqual(err.code, errorCode);
+       done();
+     }
+   );
+ });
+});
