@@ -18,7 +18,7 @@
 const error = require('../error');
 const assert = require('assert');
 
-describe.only('error', () => {
+describe('error', () => {
  it('should have an error', done => {
    const errorCode = 3;
    error.runQuery().then(
